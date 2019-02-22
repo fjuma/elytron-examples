@@ -28,6 +28,7 @@ import org.wildfly.security.auth.server.NameRewriter;
  */
 public class CasePrincipalTransformer implements PrincipalTransformer {
 
+    private static final String JBOSS_LOCAL_USER = "$local";
     private static final PrincipalTransformer delegate = PrincipalTransformer.from(new CaseRewriter().asPrincipalRewriter());
 
     public Principal apply(Principal original) {
@@ -36,7 +37,7 @@ public class CasePrincipalTransformer implements PrincipalTransformer {
 
     private static class CaseRewriter implements NameRewriter {
         public String rewriteName(String original) {
-            if (original == null) return null;
+            if (original == null || original.equals(JBOSS_LOCAL_USER)) return original;
             return original.toUpperCase(Locale.ROOT);
         }
     }
