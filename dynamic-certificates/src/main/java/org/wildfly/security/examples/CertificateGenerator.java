@@ -434,8 +434,10 @@ public class CertificateGenerator {
      * @throws Exception Errors encountered during generation, described in their corresponding methods
      */
     public void generateTwoWaySSL() throws Exception {
-        addAlias("client1");
-        addDistinguishedName("CN=client1");
+        //addAlias("client1");
+        //addDistinguishedName("CN=client1");
+        addAlias("1234567890");
+        addDistinguishedName("CN=DOE.JOHN.A.1234567890");
         setTrustStoreName("server.truststore");
         setKeyStoreName("client1.keystore");
         SelfSignedX509CertificateAndSigningKey authority = createAuthority();

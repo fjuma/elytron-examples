@@ -5,10 +5,10 @@
 /subsystem=elytron/key-store=twoWayTS:add(path=server.truststore,relative-to=jboss.server.config.dir,credential-reference={clear-text=truststorepass},type=JKS)
 
 # Configure a key-manager that references the keystore key-store
-/subsystem=elytron/key-manager=twoWayKM:add(key-store=twoWayKS,algorithm="SunX509",credential-reference={clear-text=keystorepass})
+/subsystem=elytron/key-manager=twoWayKM:add(key-store=twoWayKS,algorithm="X509",credential-reference={clear-text=keystorepass})
 
 # Configure a trust-manager that references the truststore key-store
-/subsystem=elytron/trust-manager=twoWayTM:add(key-store=twoWayTS,algorithm="SunX509")
+/subsystem=elytron/trust-manager=twoWayTM:add(key-store=twoWayTS,algorithm="X509")
 
 # Configure a server-ssl-context that references the key-manager and trust-manager
 # and requires client authentication
