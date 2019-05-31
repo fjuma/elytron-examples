@@ -38,6 +38,10 @@ import javax.security.auth.x500.X500Principal;
 import org.wildfly.security.x500.cert.SelfSignedX509CertificateAndSigningKey;
 import org.wildfly.security.x500.cert.X509CertificateBuilder;
 
+import org.wildfly.security.x500.GeneralName;
+import java.util.Arrays;
+import org.wildfly.security.x500.cert.SubjectAlternativeNamesExtension;
+
 /**
  * Utility to dynamically generate certificates
  * @author <a href="mailto:jucook@redhat.com">Justin Cook</a>
@@ -645,6 +649,9 @@ public class CertificateGenerator {
                 .setSigningKey(issuerSelfSignedX509CertificateAndSigningKey.getSigningKey())
                 .setPublicKey(publicKey)
                 .setSerialNumber(new BigInteger(Integer.toString((int) (Math.random() * 10000 + 1))))
+                .addExtension(new SubjectAlternativeNamesExtension(
+                        true,
+                        Arrays.asList(new GeneralName.RFC822Name("john.doe@example.com"), new GeneralName.DNSName("johndoe.example.com"))))
                 .build();
     }
 
